@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone 
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 class Post(models.Model):
 
     class Status(models.TextChoices):
@@ -19,4 +21,5 @@ class Post(models.Model):
         ordering = ['-publish']
     def __str__(self):
         return self.title
-    
+    def get_absolute_url(self):
+        return reverse("blog:post_detail", args=[self.id])
